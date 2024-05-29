@@ -39,10 +39,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 августа 2022" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qea-D8-r0P" userLabel="Label Date">
-                                                    <rect key="frame" x="8" y="105" width="152" height="18"/>
+                                                    <rect key="frame" x="0.0" y="105" width="361" height="18"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="152" id="Ahj-Be-fOf"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="ncd-Hn-Q1C"/>
                                                         <constraint firstAttribute="height" constant="18" id="u8a-aH-4mH"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
@@ -63,8 +63,8 @@
                                             <color key="backgroundColor" name="YP Black"/>
                                             <constraints>
                                                 <constraint firstItem="fE0-Bi-DCc" firstAttribute="leading" secondItem="OhY-cN-UJb" secondAttribute="leading" id="5yv-hs-xfn"/>
-                                                <constraint firstItem="qea-D8-r0P" firstAttribute="leading" secondItem="OhY-cN-UJb" secondAttribute="leading" constant="8" id="7Ak-SF-d0g"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qea-D8-r0P" secondAttribute="trailing" constant="16" id="EGf-Ek-bAc"/>
+                                                <constraint firstItem="qea-D8-r0P" firstAttribute="leading" secondItem="OhY-cN-UJb" secondAttribute="leading" id="7Ak-SF-d0g"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qea-D8-r0P" secondAttribute="trailing" id="EGf-Ek-bAc"/>
                                                 <constraint firstItem="a7J-T0-NLy" firstAttribute="top" secondItem="OhY-cN-UJb" secondAttribute="top" id="FzJ-Ok-A8X"/>
                                                 <constraint firstAttribute="bottom" secondItem="qea-D8-r0P" secondAttribute="bottom" constant="8" id="HIz-lK-SSd"/>
                                                 <constraint firstAttribute="trailing" secondItem="fE0-Bi-DCc" secondAttribute="trailing" id="JlW-QC-02j"/>

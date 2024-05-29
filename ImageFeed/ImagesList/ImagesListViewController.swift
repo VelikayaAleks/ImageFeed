@@ -27,11 +27,13 @@ class ImagesListViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
     
+    
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) { 
         guard let image = UIImage(named: photosName[indexPath.row]) else {
             return
         }
         
+        cell.dateLabel.applyGradient()
         cell.cellImage.image = image
         cell.dateLabel.text = dateFormatter.string(from: Date())
         
@@ -43,11 +45,28 @@ class ImagesListViewController: UIViewController {
 
 }
 
+extension UIView {
+    func applyGradient() {
+        let startColor = UIColor(red: 26 / 255, green: 27 / 255, blue: 34 / 255, alpha: 0.0).cgColor
+        let color = UIColor(red: 26 / 255, green: 27 / 255, blue: 34 / 255, alpha: 0.2).cgColor
+        let endColor = UIColor(red: 26 / 255, green: 27 / 255, blue: 34 / 255, alpha: 0.0).cgColor
+        let gradient = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = [startColor, color, endColor]
+        //gradient.locations = [0.0, 1.0]
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
+        self.layer.insertSublayer(gradient, at: 0)
+    }
+    
+}
+
+
 extension ImagesListViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+   /* func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-    }
+    }*/
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let image = UIImage(named: photosName[indexPath.row]) else {
