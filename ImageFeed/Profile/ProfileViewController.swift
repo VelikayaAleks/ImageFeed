@@ -12,13 +12,13 @@ final class  ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         view.backgroundColor  = UIColor(named: "YPBlack")
-        profile()
-        exitB()
-        label()
+        setupProfileImageView()
+        exitButtonDescription()
+        labelDescription()
         
     }
     
-    private func profile() {
+    private func setupProfileImageView() {
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
@@ -29,7 +29,7 @@ final class  ProfileViewController: UIViewController {
         imageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
     }
     
-    private func exitB() {
+    private func exitButtonDescription() {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "Exit"), for: .normal)
         button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
@@ -43,7 +43,7 @@ final class  ProfileViewController: UIViewController {
         button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
     }
     
-    private func label() {
+    private func labelDescription() {
         userName.text = "Екатерина Новикова"
         userName.textColor = .white
         userName.font = .systemFont(ofSize: 23, weight: .bold)
