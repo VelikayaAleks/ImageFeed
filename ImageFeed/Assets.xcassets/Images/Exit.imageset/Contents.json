@@ -6,10 +6,12 @@
       "scale" : "1x"
     },
     {
+      "filename" : "2ipad.and.arrow.forward.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "3ipad.and.arrow.forward.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -6,10 +6,12 @@
       "scale" : "1x"
     },
     {
+      "filename" : "2chevron.backward.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "3chevron.backward.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
