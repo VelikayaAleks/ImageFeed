@@ -5,22 +5,22 @@ final class SplashViewController: UIViewController {
     private let ShowAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     
     private let oauth2Service = OAuth2Service.shared
-    private let oauth2TokenStorage = OAuth2TokenStorage()
+    //private let oauth2TokenStorage = OAuth2TokenStorage()
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if let token = oauth2TokenStorage.token {
+        let token = OAuth2TokenStorage.shared.token
+        if token != nil {
             switchToTabBarController()
         } else {
             performSegue(withIdentifier: ShowAuthenticationScreenSegueIdentifier, sender: nil)
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNeedsStatusBarAppearanceUpdate()
-    }
+    /*override func viewWillAppear(_ animated: Bool) {
+     super.viewWillAppear(animated)
+     setNeedsStatusBarAppearanceUpdate()
+     }*/
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
@@ -40,7 +40,9 @@ extension SplashViewController {
             guard
                 let navigationController = segue.destination as? UINavigationController,
                 let viewController = navigationController.viewControllers[0] as? AuthViewController
-            else { fatalError("Failed to prepare for \(ShowAuthenticationScreenSegueIdentifier)") }
+            else { fatalError("Failed to prepare for \(ShowAuthenticationScreenSegueIdentifier)")
+                //return
+            }
             viewController.delegate = self
         } else {
             super.prepare(for: segue, sender: sender)
@@ -55,4 +57,3 @@ extension SplashViewController: AuthViewControllerDelegate {
     }
     
 }
-

@@ -1,37 +1,24 @@
 import Foundation
 import UIKit
 
-struct OAuthTokenResponseBody: Decodable {
-    let accessToken: String
-    let tokenType: String
-    let scope: String
-    let createdAt: Int
-    
-    enum CodingKeys: String, CodingKey{
-        case accessToken = "access_token"
-        case tokenType = "token_type"
-        case scope = "scope"
-        case createdAt = "created_at"
-    }
-}
-
 final class OAuth2Service {
     static let shared = OAuth2Service()
-    private init() {}
+    init() {}
     
     func makeOAuthTokenRequest(code: String) -> URLRequest? {
-        guard let baseURL = URL(string: "https://unsplash.com") else {
-            return nil
-        }
+        //guard let baseURL = URL(string: "https://unsplash.com") else {
+        //  return nil
+        //}
         
-        let urlString = "/oauth/token"
-        + "?client_id=\(Constants.accessKey)"
-        + "&&client_secret=\(Constants.secretKey)"
-        + "&&redirect_uri=\(Constants.redirectURI)"
-        + "&&code=\(code)"
-        + "&&grant_type=authorization_code"
+        let urlString = "https://unsplash.com/oauth/token"
+               + "?client_id=\(accessKey)"
+               + "&&client_secret=\(secretKey)"
+               + "&&redirect_uri=\(redirectURI)"
+               + "&&code=\(code)"
+               + "&&grant_type=authorization_code"
         
-        guard let url = URL(string: urlString, relativeTo: baseURL) else {
+        guard let url = URL(string: urlString) else {
+            print("Failed to create URL with baseURL and parameters.")
             return nil
         }
         

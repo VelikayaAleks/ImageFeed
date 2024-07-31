@@ -2,9 +2,9 @@
 import Foundation
 import UIKit
 
-final class AuthViewController: UIViewController {
+final class AuthViewController: UIViewController, WebViewViewControllerDelegate {
     
-    private let ShowWebViewSegueIdentifier = "ShowWebView"
+    private let showWebViewSegueIdentifier = "ShowWebView"
     private let oauth2Service = OAuth2Service.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
     weak var delegate: AuthViewControllerDelegate?
@@ -14,16 +14,26 @@ final class AuthViewController: UIViewController {
         configureBackButton()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == ShowWebViewSegueIdentifier {
-            guard
-                let webViewViewController = segue.destination as? WebViewViewController
-            else { fatalError("Failed to prepare for \(ShowWebViewSegueIdentifier)") }
-            webViewViewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
+    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+        
+        vc.dismiss(animated: true)
+        oauth2Service.fetchOAuthToken(code: code) { result in
+            switch result {
+            case .success(let token):
+                self.oauth2TokenStorage.token = token
+                self.delegate?.didAuthenticate(self)
+            case .failure(let error):
+                print("Failed to fetch OAuth token with error: \(error)")
+            }
         }
     }
+    
+    
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
+        dismiss(animated: true)
+    }
+    
+    
     
     private func configureBackButton() {
         navigationController?.navigationBar.backIndicatorImage = UIImage(named: "nav_back_button")
@@ -36,22 +46,13 @@ final class AuthViewController: UIViewController {
     }
 }
 
-extension AuthViewController: WebViewViewControllerDelegate {
-    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        
-        oauth2Service.fetchOAuthToken(code: code) { result in
-            switch result {
-            case .success(let token):
-                self.oauth2TokenStorage.token = token
-                self.delegate?.didAuthenticate(self)
-            case .failure(let error):
-                print("Failed to fetch OAuth token with error: \(error)")
-            }
-        }
-        
-    }
+extension AuthViewController{
     
-    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
-        dismiss(animated: true)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showWebViewSegueIdentifier {
+            let viewController = segue.destination as! WebViewViewController
+            viewController.delegate = self } else {
+                super.prepare(for: segue, sender: sender)
+            }
     }
 }
